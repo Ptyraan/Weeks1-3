@@ -18,7 +18,7 @@ public class FirstScript : MonoBehaviour
         newPos.x += speed;
         transform.position = newPos;
 
-        if (transform.position.x < 5 || transform.position.x > 5) {
+        if (transform.position.x < -5 || transform.position.x > 5) {
             speed = speed * -1;
         }
     }
