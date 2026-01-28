@@ -23,6 +23,7 @@ public class kite : MonoBehaviour
     // top right is (9, 5)
     void Update()
     {
+        // kite waves faster if higher, v is the speed the up and down Lerp uses
         t += Time.deltaTime * v * (1 + (top.transform.position.y + 5) / 25);
         if (t > 1)
         {
@@ -34,8 +35,10 @@ public class kite : MonoBehaviour
             t = 0;
             v = -v;
         }
+        // translates linear interpolation to the curve
         y = curve.Evaluate(t);
         pos = Vector2.Lerp(top.transform.position, bottom.transform.position, y);
+        // kite is stretched more the more it is to the right, xOffset is how much the segment trails behind the head
         pos.x += xOffset * (1 - (top.transform.position.x) / 90);
         pos.y += yOffset;
         transform.position = pos;
