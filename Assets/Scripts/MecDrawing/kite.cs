@@ -16,20 +16,27 @@ public class kite : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        t += -xOffset / 20;
     }
 
     // Update is called once per frame
+    // top right is (9, 5)
     void Update()
     {
-        t += Time.deltaTime * v;
-        if (t > 1 || t < 0)
+        t += Time.deltaTime * v * (1 + (top.transform.position.y + 5) / 25);
+        if (t > 1)
         {
+            t = 1;
+            v = -v;
+        }
+        if (t < 0)
+        {
+            t = 0;
             v = -v;
         }
         y = curve.Evaluate(t);
         pos = Vector2.Lerp(top.transform.position, bottom.transform.position, y);
-        pos.x += xOffset;
+        pos.x += xOffset * (1 - (top.transform.position.x) / 90);
         pos.y += yOffset;
         transform.position = pos;
     }
