@@ -3,13 +3,15 @@ using UnityEngine.InputSystem;
 
 public class kite : MonoBehaviour
 {
-    public float offset;
+    public float xOffset = 0;
+    public float yOffset = 0;
     public AnimationCurve curve;
     public Transform top;
     public Transform bottom;
     public float t = 0;
     public float v = 0;
     float y = 0;
+    Vector2 pos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +28,9 @@ public class kite : MonoBehaviour
             v = -v;
         }
         y = curve.Evaluate(t);
-        transform.position = Vector2.Lerp(top.transform.position, bottom.transform.position, y);
+        pos = Vector2.Lerp(top.transform.position, bottom.transform.position, y);
+        pos.x += xOffset;
+        pos.y += yOffset;
+        transform.position = pos;
     }
 }
