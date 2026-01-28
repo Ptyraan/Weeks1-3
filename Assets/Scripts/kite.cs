@@ -1,9 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class LinearInterpolation : MonoBehaviour
+public class kite : MonoBehaviour
 {
-    public Transform start;
-    public Transform end;
+    public float offset;
+    public Transform top;
+    public Transform bottom;
     public float t = 0;
     public float v = 0;
 
@@ -17,9 +20,13 @@ public class LinearInterpolation : MonoBehaviour
     void Update()
     {
         t += Time.deltaTime * v;
-        if (t > 1) {
+        if (t > 1)
+        {
             t = 0;
         }
         transform.position = Vector2.Lerp(start.transform.position, end.transform.position, t);
+        Vector2 Pos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Pos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        transform.position = Pos;
     }
 }
